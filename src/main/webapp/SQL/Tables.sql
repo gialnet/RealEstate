@@ -136,7 +136,7 @@ INSERT INTO customers_type (DESCRIPCION,cuenta,gasto) VALUES ('CLIENTES PAIS FUE
 CREATE TABLE customers
 (
    id                      serial      NOT NULL,
-   id_customers_type       integer references customers_type(id),
+   id_customers_type       integer default 1 references customers_type(id),
    IBAN                    varchar(34), -- los dos primeros digitos indican el país ES codigo para españa
    BIC                     varchar(11),
    Domiciliado             varchar(15) default 'domiciliado', -- por defecto domiciliado
@@ -179,34 +179,36 @@ create index customers_nif on customers(nif);
 --
 -- properties 609 13.05.98 David
 --
-CREATE TABLE properties
+CREATE TABLE properties_for_sale
 (
    id                      serial      NOT NULL, -- referencia
    id_customers_type       integer references customers_type(id),
    tipo_vivienda           varchar(20), -- Apartamento, casa, duples, unifamiliar, etc.
-   num_bedrooms            integer, -- dormitorios
-   kitchen
-   num_bathroom            integer default 1, -- baños
-   num_aseos               integer default 1, -- aseos
-   num_saloon              integer default 1, -- salones
-   garage                  integer default 1, -- cochera
+   num_bedrooms            integer default 1, -- dormitorios
+   num_kitchens            integer default 1, --cocinas
+   num_bathrooms           integer default 1, -- baños
+   num_toilets             integer default 0, -- aseos
+   num_saloons             integer default 1, -- salones
+   garage                  integer default 0, -- cochera
    terrace                 integer default 0, -- terazas
    views                   varchar(50),
    zona                    varchar(50),
    price                   numeric(10,2) default 0,
    meters                  integer, -- metros útiles
-   photos                  varchar
-   keys
+   photos                  varchar(90),
+   keys                    varchar(2) default 'NO',
    direccion               varchar(90), -- Avenida Europa, 21
    objeto                  varchar(40), -- bloque A 2ºD
-   poblacion               varchar(90) default '18690 Almu��car Granada', -- 18690 Almuñécar Granada
+   poblacion               varchar(90) default '18690 Almuñecar Granada', -- 18690 Almuñécar Granada
    Pais_ISO3166            varchar(2) default 'ES',
    rol                     integer,
    carpeta_digitalizacion  varchar(90),
    tipo                    varchar(40)    DEFAULT 'US'::character varying,
    id_delegacion           integer,
    id_departamento         integer,
-   certificado             bytea,
+   remarks                 text, -- comentarios
+   nota_simple             bytea,
+   estado                  varchar(25) default 'En venta', -- en venta, vendida, 
    primary key (id)
 );
 
