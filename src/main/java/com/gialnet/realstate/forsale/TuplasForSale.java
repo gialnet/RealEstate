@@ -6,6 +6,8 @@
 package com.gialnet.realstate.forsale;
 
 import java.math.BigDecimal;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 /**
  *
@@ -40,6 +42,7 @@ public class TuplasForSale {
     private final String remarks;
     private final byte[] nota_simple;
     private final String estado;
+    private final String LocalePrice;
 
     public int getId() {
         return id;
@@ -153,6 +156,10 @@ public class TuplasForSale {
         return estado;
     }
     
+    public String getLocalePrice() {
+        return LocalePrice;
+    }
+    
     public static class Builder {
         private final int id;
         private int id_customers_type=1;
@@ -182,6 +189,7 @@ public class TuplasForSale {
         private String remarks="";
         private byte[] nota_simple;
         private String estado="En venta";
+        private String LocalePrice="";
         
         public Builder(final int id) {
             this.id = id;
@@ -271,5 +279,104 @@ public class TuplasForSale {
             this.carpeta_digitalizacion = carpeta_digitalizacion;
             return this;
         }
+           public Builder Tipo(final String tipo) {
+            this.tipo = tipo;
+            return this;
+        }
+           public Builder Id_delegacion(final int id_delegacion) {
+            this.id_delegacion = id_delegacion;
+            return this;
+        }
+           public Builder Id_departamento(final int id_departamento) {
+            this.id_departamento = id_departamento;
+            return this;
+        }
+           public Builder Remarks(final String remarks) {
+            this.remarks = remarks;
+            return this;
+        }
+           public Builder Nota_simple(final byte[] nota_simple) {
+            this.nota_simple = nota_simple;
+            return this;
+        }
+           public Builder Estado(final String estado) {
+            this.estado = estado;
+            return this;
+        }
+           public TuplasForSale build() {
+            return new TuplasForSale(this);
+        }
+            public TuplasForSale build(Locale formato) {
+            return new TuplasForSale(this, formato);
+        }
+    }
+    
+    
+    private TuplasForSale (Builder builder)
+    {
+        this.id=builder.id;
+        this.id_customers_type=builder.id_customers_type;
+        this.tipo_vivienda=builder.tipo_vivienda;
+        this.num_bedrooms=builder.num_bedrooms;
+        this.num_kitchens=builder.num_kitchens;
+        this.num_bathrooms=builder.num_bathrooms;
+        this.num_toilets=builder.num_toilets;
+        this.num_saloons=builder.num_saloons;
+        this.garage=builder.garage;
+        this.terrace=builder.terrace;
+        this.views=builder.views;
+        this.zona=builder.zona;
+        this.price=builder.price;
+        this.meters=builder.meters;
+        this.photos=builder.photos;
+        this.keys=builder.keys;
+        this.direccion=builder.direccion;
+        this.objeto=builder.objeto;
+        this.poblacion=builder.poblacion;
+        this.pais_ISO3166=builder.pais_ISO3166;
+        this.rol=builder.rol;
+        this.carpeta_digitalizacion=builder.carpeta_digitalizacion;
+        this.tipo=builder.tipo;
+        this.id_delegacion=builder.id_delegacion;
+        this.id_departamento=builder.id_departamento;
+        this.remarks=builder.remarks;
+        this.nota_simple=builder.nota_simple;
+        this.estado=builder.estado;
+        this.LocalePrice=builder.LocalePrice;
+        
+    }
+    
+    private TuplasForSale (Builder builder, Locale formato)
+    {
+        this.id=builder.id;
+        this.id_customers_type=builder.id_customers_type;
+        this.tipo_vivienda=builder.tipo_vivienda;
+        this.num_bedrooms=builder.num_bedrooms;
+        this.num_kitchens=builder.num_kitchens;
+        this.num_bathrooms=builder.num_bathrooms;
+        this.num_toilets=builder.num_toilets;
+        this.num_saloons=builder.num_saloons;
+        this.garage=builder.garage;
+        this.terrace=builder.terrace;
+        this.views=builder.views;
+        this.zona=builder.zona;
+        this.price=builder.price;
+        this.meters=builder.meters;
+        this.photos=builder.photos;
+        this.keys=builder.keys;
+        this.direccion=builder.direccion;
+        this.objeto=builder.objeto;
+        this.poblacion=builder.poblacion;
+        this.pais_ISO3166=builder.pais_ISO3166;
+        this.rol=builder.rol;
+        this.carpeta_digitalizacion=builder.carpeta_digitalizacion;
+        this.tipo=builder.tipo;
+        this.id_delegacion=builder.id_delegacion;
+        this.id_departamento=builder.id_departamento;
+        this.remarks=builder.remarks;
+        this.nota_simple=builder.nota_simple;
+        this.estado=builder.estado;
+        this.LocalePrice=NumberFormat.getCurrencyInstance(formato).format(price);;
+        
     }
 }
