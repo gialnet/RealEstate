@@ -183,6 +183,7 @@ CREATE TABLE properties_for_sale
 (
    id                      serial      NOT NULL, -- referencia
    id_customers_type       integer references customers_type(id),
+   owner                   integer, -- propietario
    tipo_vivienda           varchar(20), -- Apartamento, casa, duples, unifamiliar, etc.
    num_bedrooms            integer default 1, -- dormitorios
    num_kitchens            integer default 1, --cocinas
@@ -191,8 +192,10 @@ CREATE TABLE properties_for_sale
    num_saloons             integer default 1, -- salones
    garage                  integer default 0, -- cochera
    terrace                 integer default 0, -- terazas
+   other_features          json, -- otras caracteristicas
    views                   varchar(50),
    zona                    varchar(50),
+   urbanization            varchar(50),
    price                   numeric(10,2) default 0,
    meters                  integer, -- metros útiles
    photos                  varchar(90),

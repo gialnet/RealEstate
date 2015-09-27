@@ -15,6 +15,7 @@ import java.util.Locale;
  */
 public class TuplasForSale {
     private final int id;
+    private final int owner;
     private final int id_customers_type;
     private final String tipo_vivienda;
     private final int num_bedrooms;
@@ -43,9 +44,15 @@ public class TuplasForSale {
     private final byte[] nota_simple;
     private final String estado;
     private final String LocalePrice;
+    private final String other_features;
+    private final String urbanization;
 
     public int getId() {
         return id;
+    }
+    
+    public int getOwner() {
+        return owner;
     }
 
     public int getId_customers_type() {
@@ -160,8 +167,17 @@ public class TuplasForSale {
         return LocalePrice;
     }
     
+    public String getOther_features() {
+        return other_features;
+    }
+    
+    public String getUrbanization() {
+        return urbanization;
+    }
+    
     public static class Builder {
         private final int id;
+        private int owner=0;
         private int id_customers_type=1;
         private String tipo_vivienda="Apartamento";
         private int num_bedrooms=1;
@@ -190,11 +206,17 @@ public class TuplasForSale {
         private byte[] nota_simple;
         private String estado="En venta";
         private String LocalePrice="";
+        private String other_features;
+        private String urbanization;
         
         public Builder(final int id) {
             this.id = id;
         }
         
+         public Builder Owner(final int owner) {
+            this.owner = owner;
+            return this;
+        }
          public Builder Id_customers_type(final int id_customers_type) {
             this.id_customers_type = id_customers_type;
             return this;
@@ -303,6 +325,14 @@ public class TuplasForSale {
             this.estado = estado;
             return this;
         }
+           public Builder Other_features(final String other_features) {
+            this.other_features = other_features;
+            return this;
+        }
+           public Builder Urbanization(final String urbanization) {
+            this.urbanization = urbanization;
+            return this;
+        }
            public TuplasForSale build() {
             return new TuplasForSale(this);
         }
@@ -315,6 +345,7 @@ public class TuplasForSale {
     private TuplasForSale (Builder builder)
     {
         this.id=builder.id;
+        this.owner=builder.owner;
         this.id_customers_type=builder.id_customers_type;
         this.tipo_vivienda=builder.tipo_vivienda;
         this.num_bedrooms=builder.num_bedrooms;
@@ -343,12 +374,15 @@ public class TuplasForSale {
         this.nota_simple=builder.nota_simple;
         this.estado=builder.estado;
         this.LocalePrice=builder.LocalePrice;
+        this.other_features=builder.other_features;
+        this.urbanization=builder.urbanization;
         
     }
     
     private TuplasForSale (Builder builder, Locale formato)
     {
         this.id=builder.id;
+        this.owner=builder.owner;
         this.id_customers_type=builder.id_customers_type;
         this.tipo_vivienda=builder.tipo_vivienda;
         this.num_bedrooms=builder.num_bedrooms;
@@ -376,7 +410,9 @@ public class TuplasForSale {
         this.remarks=builder.remarks;
         this.nota_simple=builder.nota_simple;
         this.estado=builder.estado;
-        this.LocalePrice=NumberFormat.getCurrencyInstance(formato).format(price);;
+        this.LocalePrice=NumberFormat.getCurrencyInstance(formato).format(price);
+        this.other_features=builder.other_features;
+        this.urbanization=builder.urbanization;
         
     }
 }
