@@ -5,10 +5,21 @@
  */
 package com.gialnet.realstate.forsale;
 
+import connect.PoolConn;
+import java.sql.SQLException;
+import javax.naming.NamingException;
+
 /**
  *
  * @author Usuario
  */
-public class SQLForSale {
-    
+public class SQLForSale extends PoolConn {
+     private final String version;
+
+    public SQLForSale(String version) throws SQLException, NamingException {
+        super();
+        this.version = version;
+    }
+     
+     
 }
