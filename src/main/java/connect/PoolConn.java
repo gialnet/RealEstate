@@ -12,14 +12,14 @@ import javax.sql.DataSource;
 
 /**
  *
- * @author antonio
+ * @author antonio https://github.com/gialnet/RealEstate.git
  */
 
 public abstract class PoolConn {
     
     private static DataSource datasource;
     //protected Connection connection;
-    private final String QuePool="jdbc/myEmpresa001";
+    private final String QuePool="jdbc/RealEstate";
     
     public PoolConn() throws SQLException, NamingException {
         
