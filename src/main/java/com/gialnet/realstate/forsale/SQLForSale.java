@@ -50,6 +50,27 @@ public class SQLForSale extends PoolConn {
                 Tupla = new TuplasForSale.Builder(rs.getInt("id")).
                         Owner(rs.getInt("owner")).
                         Tipo_vivienda(rs.getString("tipo_vivienda")).
+                        Num_bedrooms(rs.getInt("num_bedrooms")).
+                        Num_bathrooms(rs.getInt("num_bathrooms")).
+                        Num_toilets(rs.getInt("num_toilets")).
+                        Num_kitchens(rs.getInt("num_kitchens")).
+                        Num_saloons(rs.getInt("num_saloons")).
+                        Garage(rs.getInt("garage")).
+                        Terrace(rs.getInt("terrace")).
+                        Other_features(rs.getString("other_features")).
+                        Views(rs.getString("views")).
+                        Zona(rs.getString("zona")).
+                        Urbanization(rs.getString("urbanization")).
+                        Price(rs.getBigDecimal("price")).
+                        Meters(rs.getInt("meters")).
+                        Photos(rs.getString("photos")).
+                        Keys(rs.getString("keys")).
+                        Direccion(rs.getString("direccion")).
+                        Objeto(rs.getString("objeto")).
+                        Poblacion(rs.getString("poblacion")).
+                        Remarks(rs.getString("remarks")).
+                        Nota_simple(rs.getBytes("nota_simple")).
+                        Estado(rs.getString("estado")).
                         build();
             }
             

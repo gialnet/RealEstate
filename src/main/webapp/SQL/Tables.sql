@@ -5,6 +5,10 @@
 
 --
 
+-- CREATE USER zayoser PASSWORD 'a1';
+-- CREATE DATABASE inmobiliaria OWNER zayoser;
+
+
 --
 -- Crear una base datos para Demo
 --
