@@ -10,7 +10,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 import javax.naming.NamingException;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 /**
  *
@@ -88,5 +94,95 @@ public class SQLForSale extends PoolConn {
          return Tupla;
      }
     
+     /**
+      * Propiedades ordenadas por las más recientes
+      * @param NumPage
+      * @param SizePage
+      * @return
+      * @throws SQLException 
+      */
+     public List<TuplasForSale> getTuplasForSale(int NumPage,int SizePage) throws SQLException{
+         
+         Connection conn = PGconectar();
+         List<TuplasForSale> tf = new ArrayList<>();
+         
+         try {
+
+            int Offset = SizePage * (NumPage-1);
+            PreparedStatement st = conn.prepareStatement("SELECT * from vw_properties order by id desc LIMIT ? OFFSET ?");
+            st.setInt(1, SizePage);
+            st.setInt(2, Offset);
+            
+            ResultSet rs = st.executeQuery();
+
+
+            while (rs.next()) {
+
+                tf.add( new TuplasForSale.Builder(rs.getInt("id")).
+                        Tipo_vivienda(rs.getString("tipo_vivienda")).
+                        Num_bedrooms(rs.getInt("num_bedrooms")).
+                        Garage(rs.getInt("garage")).
+                        Zona(rs.getString("zona")).
+                        Urbanization(rs.getString("urbanization")).
+                        Price(rs.getBigDecimal("price")).
+                        build(Locale.GERMANY));
+                
+            }
+            
+            st.close();
+
+        } catch (SQLException e) {
+
+            System.out.println("vw_properties Connection Failed!");
+
+        } finally {
+
+            conn.close();
+        }
+        
+        return tf;
+         
+     }
+     
+     /**
+      * 
+      * @param Searchfilter 
+      */
+     private void AnalizeFilter(String Searchfilter){
+        
+         
+         StringBuilder sb = new StringBuilder();
+         
+         JSONObject jsonObject = null;
+                    
+                    // 
+                    try {
+                     jsonObject = (JSONObject) new JSONParser().parse(Searchfilter);
+                    } catch (ParseException e) {
+                     throw new RuntimeException("Unable to parse json " + Searchfilter);
+                    }
+
+                    /*
+                     * '{   "num_bedrooms": "3", 
+                            "Impuestos": "yes",
+                            "Nominas": "yes",
+                            "NominasApp": "no",
+                            "Firma": "yes",
+                            "Burofax":  "yes",
+                            "Almacenamiento": "no",
+                            "Indexacion":  "no",
+                            "LimiteUsuarios": "1"
+                        }'::json
+                     */
+                    
+                    String num_bedrooms = (String) jsonObject.get("num_bedrooms");
+                    sb.append("num_bedrooms=").append( num_bedrooms);
+                    
+                    
+         if ("Hola".equals(Searchfilter))
+         {
+             Searchfilter="";
+         }
+     }
      
 }

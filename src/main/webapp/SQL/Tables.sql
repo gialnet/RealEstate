@@ -188,7 +188,7 @@ CREATE TABLE properties_for_sale
    id                      serial      NOT NULL, -- referencia
    id_customers_type       integer references customers_type(id),
    owner                   integer, -- propietario
-   tipo_vivienda           varchar(20), -- Apartamento, casa, duples, unifamiliar, etc.
+   tipo_vivienda           varchar(20), -- Apartamento, casa, duplex, unifamiliar, etc.
    num_bedrooms            integer default 1, -- dormitorios
    num_kitchens            integer default 1, --cocinas
    num_bathrooms           integer default 1, -- baños
@@ -197,7 +197,7 @@ CREATE TABLE properties_for_sale
    garage                  integer default 0, -- cochera
    terrace                 integer default 0, -- terazas
    other_features          json, -- otras caracteristicas
-   views                   varchar(50),
+   views                   varchar(50), -- primera linea de playa, beachfront
    zona                    varchar(50),
    urbanization            varchar(50),
    price                   numeric(10,2) default 0,
@@ -215,9 +215,41 @@ CREATE TABLE properties_for_sale
    id_departamento         integer,
    remarks                 text, -- comentarios
    nota_simple             bytea,
-   estado                  varchar(25) default 'En venta', -- en venta, vendida, 
+   estado                  varchar(25) default 'for sale', -- for sale, sold, ...
    primary key (id)
 );
+
+create index for_sale_num_bedrooms on properties_for_sale(num_bedrooms);
+create index for_sale_price on properties_for_sale(price);
+create index for_sale_zona on properties_for_sale(zona);
+create index for_sale_urbanization on properties_for_sale(urbanization);
+create index for_sale_poblacion on properties_for_sale(poblacion);
+create index for_sale_id_delegacion on properties_for_sale(id_delegacion);
+create index for_sale_estado on properties_for_sale(estado);
+create index for_sale_views on properties_for_sale(views);
+
+--
+-- Vista de propiedades a la venta
+--
+
+create or replace view vw_properties (id,owner,tipo_vivienda,num_bedrooms,num_bathrooms,num_toilets,num_kitchens,num_saloons,garage,terrace,
+other_features,views,zona,urbanization,price,meters,photos,keys,direccion,objeto,poblacion,remarks,nota_simple,estado)
+as select id,owner,tipo_vivienda,num_bedrooms,num_bathrooms,num_toilets,num_kitchens,num_saloons,garage,terrace,
+other_features,views,zona,urbanization,price,meters,photos,keys,direccion,objeto,poblacion,remarks,nota_simple,estado
+from properties_for_sale where estado ='for sale';
+
+
+--
+-- Posibles consultas
+--
+-- Por número de dormitorios
+-- Por número de dormitorios en un rango de precios
+-- Por tipo de vivienda
+-- Por tipo de vivienda en un rango de precios
+-- Por tipo de vivienda y número de dormitorios
+-- con garaje
+
+select * from vw_properties where tipo_vivienda='flat' and num_bedrooms=3 and price < 300 mil and views='beachfront'
 
 
 --
