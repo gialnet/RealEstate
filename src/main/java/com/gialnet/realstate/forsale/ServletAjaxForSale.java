@@ -4,6 +4,7 @@
  */
 package com.gialnet.realstate.forsale;
 
+import Photos.ResizeImages;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -54,7 +55,14 @@ public class ServletAjaxForSale extends HttpServlet {
                     SQLForSale myProperty = new SQLForSale();
                     break;
                 }
-                default:
+            case "ResizeJPG":
+                {
+                    String id_image = request.getParameter("xIDImage");
+                    ResizeImages myPhoto = new ResizeImages();
+                    myPhoto.ResizeJPG(id_image);
+                    break;
+                }
+            default:
                 response.getWriter().write("Error, mensaje no contemplado: "+accion);
                 break;
         }

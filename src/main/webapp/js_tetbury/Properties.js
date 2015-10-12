@@ -201,4 +201,52 @@ function seleccionarProveedor() {
 
 }
 
+/**
+ * Ajustar el tamaño de una imagen
+ * @returns {Conectar}
+ */
+function ResizeImageProperty()
+{
 
+    
+    var xImage=document.getElementById('xImage').value;
+    //alert(id_presu);
+    var url='ServletAjaxForSale.servlet';
+    var dataToSend='accion=ResizeJPG&xImage='+xImage;
+    var conn = new Conectar(url, dataToSend);
+       
+    conn.pageRequest.onreadystatechange = function() { ShowResultResize(conn.pageRequest); };
+
+    conn.Enviar();
+    
+    return conn;
+}
+
+/**
+ * 
+ * @param {type} pageRequest
+ * @returns {unresolved}
+ */
+function ShowResultResize(pageRequest) {
+
+
+    if (pageRequest.readyState === 4)
+    {
+        if (pageRequest.status === 200)
+        {
+            // Solo descomentar para depuración
+            //alert(pageRequest.responseText);
+            if (pageRequest.responseText === 'Error')
+                alert(pageRequest.responseText);
+            else
+            {
+                return pageRequest.responseText;
+
+            }
+
+
+        }
+    }
+    else
+        return;
+}

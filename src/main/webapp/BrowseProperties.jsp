@@ -89,6 +89,9 @@
         </div>
     <!-- /fixed top -->
 
+    <script type="text/javascript">
+        ResizeImageProperty();
+    </script>
 
     <!-- Content container -->
     <div id="container">
@@ -160,6 +163,7 @@
                 %>
                 
                 <input type="hidden" name="xIDProperty" id="xIDProperty" value="<%= xIDPro %>">
+                <input type="hidden" name="xImage" id="xImage" value="prueba.jpg">
                 <div class="row-fluid">
 
                     <div class="span12">
