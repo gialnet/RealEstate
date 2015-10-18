@@ -29,8 +29,11 @@ public class TuplasForSale {
     private final String zona;
     private final BigDecimal price;
     private final int meters;
+    private final String year_built;
+    private final String reformed;
     private final String photos;
     private final String keys;
+    private final int geopos;
     private final String direccion;
     private final String objeto;
     private final String poblacion;
@@ -110,9 +113,21 @@ public class TuplasForSale {
     public String getPhotos() {
         return photos;
     }
+    
+    public String getYear_built() {
+        return year_built;
+    }
+    
+    public String getReformed() {
+        return reformed;
+    }
 
     public String getKeys() {
         return keys;
+    }
+    
+    public int getGeopos() {
+        return geopos;
     }
 
     public String getDireccion() {
@@ -191,8 +206,11 @@ public class TuplasForSale {
         private String zona="";
         private BigDecimal price = new BigDecimal(0);;
         private int meters=0;
+        private String year_built="";
+        private String reformed="";
         private String photos="";
         private String keys="No";
+        private int geopos=0;
         private String direccion="";
         private String objeto="";
         private String poblacion="Almuñécar";
@@ -273,8 +291,20 @@ public class TuplasForSale {
             this.photos = photos;
             return this;
         }
+          public Builder Year_built(final String year_built) {
+            this.year_built = year_built;
+            return this;
+        }
+          public Builder Reformed(final String reformed) {
+            this.reformed = reformed;
+            return this;
+        }
           public Builder Keys(final String keys) {
             this.keys = keys;
+            return this;
+        }
+          public Builder Geopos(final int geopos) {
+            this.geopos = geopos;
             return this;
         }
           public Builder Direccion(final String direccion) {
@@ -359,8 +389,11 @@ public class TuplasForSale {
         this.zona=builder.zona;
         this.price=builder.price;
         this.meters=builder.meters;
+        this.year_built=builder.year_built;
+        this.reformed=builder.reformed;
         this.photos=builder.photos;
         this.keys=builder.keys;
+        this.geopos=builder.geopos;
         this.direccion=builder.direccion;
         this.objeto=builder.objeto;
         this.poblacion=builder.poblacion;
@@ -396,8 +429,11 @@ public class TuplasForSale {
         this.zona=builder.zona;
         this.price=builder.price;
         this.meters=builder.meters;
+        this.year_built=builder.year_built;
+        this.reformed=builder.reformed;
         this.photos=builder.photos;
         this.keys=builder.keys;
+        this.geopos=builder.geopos;
         this.direccion=builder.direccion;
         this.objeto=builder.objeto;
         this.poblacion=builder.poblacion;

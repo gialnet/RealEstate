@@ -179,7 +179,10 @@ CREATE TABLE customers
 create index customers_nombre on customers(nombre);
 create index customers_nif on customers(nif);
 
-
+-- earthdistance
+-- http://tapoueh.org/blog/2013/08/05-earthdistance
+-- create extension cube;
+-- create extension earthdistance;
 --
 -- properties 609 13.05.98 David
 --
@@ -202,8 +205,11 @@ CREATE TABLE properties_for_sale
    urbanization            varchar(50),
    price                   numeric(10,2) default 0,
    meters                  integer, -- metros útiles
+   year_built              varchar(4), -- año de construcción
+   reformed                varchar(25), -- reformado
    photos                  varchar(90),
    keys                    varchar(2) default 'NO',
+   geopos                  point, -- geo posicionamiento
    direccion               varchar(90), -- Avenida Europa, 21
    objeto                  varchar(40), -- bloque A 2ºD
    poblacion               varchar(90) default '18690 Almuñecar Granada', -- 18690 Almuñécar Granada
@@ -227,15 +233,15 @@ create index for_sale_poblacion on properties_for_sale(poblacion);
 create index for_sale_id_delegacion on properties_for_sale(id_delegacion);
 create index for_sale_estado on properties_for_sale(estado);
 create index for_sale_views on properties_for_sale(views);
-
+create index for_sale_geopos on properties_for_sale using gist(geopos);
 --
 -- Vista de propiedades a la venta
 --
 
 create or replace view vw_properties (id,owner,tipo_vivienda,num_bedrooms,num_bathrooms,num_toilets,num_kitchens,num_saloons,garage,terrace,
-other_features,views,zona,urbanization,price,meters,photos,keys,direccion,objeto,poblacion,remarks,nota_simple,estado)
+other_features,views,zona,urbanization,price,meters,year_built,reformed,photos,keys,geopos,direccion,objeto,poblacion,remarks,nota_simple,estado)
 as select id,owner,tipo_vivienda,num_bedrooms,num_bathrooms,num_toilets,num_kitchens,num_saloons,garage,terrace,
-other_features,views,zona,urbanization,price,meters,photos,keys,direccion,objeto,poblacion,remarks,nota_simple,estado
+other_features,views,zona,urbanization,price,meters,year_built,reformed,photos,keys,direccion,objeto,geopos,poblacion,remarks,nota_simple,estado
 from properties_for_sale where estado ='for sale';
 
 

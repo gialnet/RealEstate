@@ -70,8 +70,11 @@ public class SQLForSale extends PoolConn {
                         Urbanization(rs.getString("urbanization")).
                         Price(rs.getBigDecimal("price")).
                         Meters(rs.getInt("meters")).
+                        Year_built(rs.getString("year_built")).
+                        Reformed(rs.getString("reformed")).
                         Photos(rs.getString("photos")).
                         Keys(rs.getString("keys")).
+                        Geopos(rs.getInt("geopos")).
                         Direccion(rs.getString("direccion")).
                         Objeto(rs.getString("objeto")).
                         Poblacion(rs.getString("poblacion")).
