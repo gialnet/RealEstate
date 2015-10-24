@@ -1,6 +1,6 @@
 
 /**
- * Lista de partidas de un presupuesto
+ * Lista de propiedades
  * @returns {Conectar}
  */
 
@@ -9,13 +9,12 @@ function LeerProperties()
 
     var pag=window.pagina;
     var tama=window.pagsize;
-    var id_property=document.getElementById('xIDProperty').value;
     //alert(id_presu);
     var url='ServletAjaxForSale.servlet';
-    var dataToSend='accion=ListaProperties&pagina='+pag +'&size='+tama+'&xIDProperty='+id_property;
+    var dataToSend='accion=ListaProperties&pagina='+pag +'&size='+tama;
     var conn = new Conectar(url, dataToSend);
        
-    conn.pageRequest.onreadystatechange = function() { ListaPresupuesto(conn.pageRequest); };
+    conn.pageRequest.onreadystatechange = function() { ListaProperties(conn.pageRequest); };
 
     conn.Enviar();
     
@@ -27,7 +26,7 @@ function LeerProperties()
  * @param {type} pageRequest
  * @returns {unresolved}
  */
-function ListaPresupuesto(pageRequest) {
+function ListaProperties(pageRequest) {
 
 
     if (pageRequest.readyState === 4)
@@ -40,7 +39,7 @@ function ListaPresupuesto(pageRequest) {
                 alert(pageRequest.responseText);
             else
             {
-                CrearTablaPresupuestos(pageRequest.responseText);
+                CrearTablaProperties(pageRequest.responseText);
                 //return pageRequest.responseText;
 
             }
@@ -57,7 +56,7 @@ function ListaPresupuesto(pageRequest) {
  * @param {type} myJson
  * @returns {undefined}
  */
-function CrearTablaPresupuestos(myJson)
+function CrearTablaProperties(myJson)
 {
 
     var tabla = new grid("oTabla");
@@ -79,18 +78,13 @@ function CrearTablaPresupuestos(myJson)
         //tabla.AddRowCellText(row, 0, obj[j].id);
         var celda = tabla.AddRowCellText(row, 0, obj[j].id);
         celda.setAttribute('hidden', 'true'); // ocultar la columna ID
-        tabla.AddRowCellText(row, 1, obj[j].Capitulo );
-        tabla.AddRowCellText(row, 2, obj[j].TipoGasto );
-        tabla.AddRowCellText(row, 3, obj[j].CuentaGasto );
-        tabla.AddRowCellText(row, 4, obj[j].Partida );
+        tabla.AddRowCellText(row, 1, obj[j].tipo_vivienda );
+        tabla.AddRowCellText(row, 2, obj[j].num_bedrooms );
+        tabla.AddRowCellText(row, 3, obj[j].garage );
+        tabla.AddRowCellText(row, 4, obj[j].LocalePrice );
         
-        celda=tabla.AddRowCellNumber(row, 5, obj[j].LocaleImporte );
-        celda.setAttribute('id', 'oImporte'+myfila);
-        celda.setAttribute('onclick', 'GetCellImporte(this.id);');
-        
-        tabla.AddRowCellText(row, 6,
-        '<ul class="table-controls"><li ><a  onclick="UpdatePresupuesto('+(j+1)+');"  class="btn tip" title="Editar"> <i class="icon-refresh"> </i> </a></li>'+
-        '</ul>');
+        tabla.AddRowCellText(row, 5, obj[j].zona );
+        tabla.AddRowCellText(row, 6, obj[j].price );
     
         window.fila++;
         myfila=window.fila;
@@ -98,155 +92,4 @@ function CrearTablaPresupuestos(myJson)
     obj=null;
 
 
-}
-
-/**
- * Editar el importe de una partida
- * 
- * @param {type} myID
- * @returns {undefined}
- */
-
-function GetCellImporte(myID)
-{
-    var oValor=document.getElementById(myID);
-    var stringID=myID.toString();
-    var campo;
-    
-   
-    if (oValor.innerHTML.toString().substring(0,6) ==='<input')
-        oValor.innerHTML=document.getElementById('importe').value;
-    else
-        {
-            campo='<input name="importe" onblur="InputToRowCellHtml(this.id,'+stringID+');" value="'+
-                    oValor.innerHTML+'" type="text" id="concepto" size="60" maxlength="90" onkeypress="detectar_tecla(event, this.id,'+
-                    stringID+')" />';
-            oValor.innerHTML=campo;
-        }
-
-    document.getElementById('importe').focus();
-   
-}
-
-
-
-
-/**
- * Actualizar los datos de un socio
- * @param {type} numFila
- * @returns {undefined}
- */
-function UpdatePresupuesto(numFila)
-{
-    //
-    var xID='ofila'+numFila;
-    var oCelda = document.getElementById(xID).cells[0];
-
-    //window.location.href = 'NewSocio.jsp?xIDSocio='+oCelda.innerHTML;
-}
-
-/**
- * Alta de un nuevo socio
- * @returns {undefined}
- */
-function NuevoPresupuesto()
-{
-    // paso un cero para que sea un alta
-    //window.location.href = 'NewSocio.jsp?xIDSocio=0';
-}
-
-function newCapitulo(){
-     var idPre = $('#xCapitulo').val();   
-    
-    
-}
-
-/**
- * Añadir una partida al presupuesto
- * @returns {undefined}
- */
-function newPartida(){
-    var idPre = $('#xIDPre').val();    
-    var nombre_partida = $('#xPartida').val();
-    var capitulo = $('#xTipoCapitulo').val();
-    var tipo_prov = $('#xTipoProv').val();
-    var importe = $('#xImporte').val();
-    
-    //alert('nombre part:'+nombre_partida+'- capi:'+capitulo+'-tipo_prov:'+tipo_prov+'-'+'-id_pre:'+idPre);
- 
-    window.location.href = 'ServletAddPartida.servlet?xIdPre='+idPre+'&xNomPartida='+nombre_partida+'&xIDCapitulo='+capitulo
-            +'&xTipoProvee='+tipo_prov+'&xImporte='+importe;
-}
-
-function seleccionarGrupoGasto()
-{
-    //alert($("#listaClientes option:selected").val());
-    document.getElementById("xIDGrupoGasto").value = $("#grupoGasto option:selected").val();
-    //id_customers_type $('option:selected', this).attr('mytag');
-   
-
-
-}
-
-
-
-            
-
-function seleccionarProveedor() {
-    // alert($("#listaClientes option:selected").val());
-    document.getElementById("xIDCodProveedor").value = $("#listaProveedores option:selected").val();
-    //id_customers_type $('option:selected', this).attr('mytag');
-    document.getElementById("xTipoProv").value = $("#listaProveedores option:selected").attr('id_suppliers_type');
-
-
-}
-
-/**
- * Ajustar el tamaño de una imagen
- * @returns {Conectar}
- */
-function ResizeImageProperty()
-{
-
-    
-    var xImage=document.getElementById('xImage').value;
-    //alert(id_presu);
-    var url='ServletAjaxForSale.servlet';
-    var dataToSend='accion=ResizeJPG&xImage='+xImage;
-    var conn = new Conectar(url, dataToSend);
-       
-    conn.pageRequest.onreadystatechange = function() { ShowResultResize(conn.pageRequest); };
-
-    conn.Enviar();
-    
-    return conn;
-}
-
-/**
- * 
- * @param {type} pageRequest
- * @returns {unresolved}
- */
-function ShowResultResize(pageRequest) {
-
-
-    if (pageRequest.readyState === 4)
-    {
-        if (pageRequest.status === 200)
-        {
-            // Solo descomentar para depuración
-            //alert(pageRequest.responseText);
-            if (pageRequest.responseText === 'Error')
-                alert(pageRequest.responseText);
-            else
-            {
-                return pageRequest.responseText;
-
-            }
-
-
-        }
-    }
-    else
-        return;
 }

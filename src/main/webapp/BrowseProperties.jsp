@@ -89,10 +89,6 @@
         </div>
     <!-- /fixed top -->
 
-    <script type="text/javascript">
-        ResizeImageProperty();
-    </script>
-
     <!-- Content container -->
     <div id="container">
 
@@ -207,18 +203,18 @@
 
                                 window.pagina=1;
                                 window.pagsize=10;
-                                var conn2=LeerPresupuesto();
+                                var conn2=LeerProperties();
                             </script>
                             
                             <div class="table-footer">
 
                                 <div class="pagination">
                                     <ul>
-                                        <li><a href="#" onclick="conn2.PrevPage('accion=ListaPresupuesto&xIDPresupuesto=<%= xIDPro %>');">Anterior</a></li>
+                                        <li><a href="#" onclick="conn2.PrevPage('accion=ListaProperties');">Anterior</a></li>
 
                                         <li class="active"><a href="#" id="xPag">1</a></li>
 
-                                        <li><a href="#" onclick="conn2.NextPage('accion=ListaPresupuesto&xIDPresupuesto=<%= xIDPro %>');">Siguiente</a></li>
+                                        <li><a href="#" onclick="conn2.NextPage('accion=ListaProperties');">Siguiente</a></li>
                                     </ul>
                                 </div>
                             </div>

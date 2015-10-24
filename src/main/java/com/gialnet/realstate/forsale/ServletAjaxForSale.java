@@ -8,6 +8,7 @@ import Photos.ResizeImages;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
@@ -50,8 +51,10 @@ public class ServletAjaxForSale extends HttpServlet {
         switch (accion) {
             case "ListaProperties":
                 {
-                    String id_property = request.getParameter("xIDProperty");
+
                     SQLForSale myProperty = new SQLForSale();
+                    List<TuplasForSale> ListaProperties = myProperty.getTuplasForSale(Integer.parseInt(pagina),Integer.parseInt(size));
+                    response.getWriter().write(gson.toJson(ListaProperties));
                     break;
                 }
             case "ResizeJPG":
