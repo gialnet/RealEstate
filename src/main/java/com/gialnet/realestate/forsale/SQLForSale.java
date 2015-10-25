@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gialnet.realstate.forsale;
+package com.gialnet.realestate.forsale;
 
-import connect.PoolConn;
-import static connect.PoolConn.PGconectar;
+import com.gialnet.realestate.connect.PoolConn;
+import static com.gialnet.realestate.connect.PoolConn.PGconectar;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

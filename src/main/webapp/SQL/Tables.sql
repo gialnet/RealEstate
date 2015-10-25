@@ -179,6 +179,24 @@ CREATE TABLE customers
 create index customers_nombre on customers(nombre);
 create index customers_nif on customers(nif);
 
+CREATE TABLE properties_type
+(
+    id              serial      NOT NULL,
+    descripcion     varchar(50),
+    primary key (id)
+);
+
+INSERT INTO properties_type (descripcion) VALUES ('Piso');
+INSERT INTO properties_type (descripcion) VALUES ('Atico');
+INSERT INTO properties_type (descripcion) VALUES ('Estudio');
+INSERT INTO properties_type (descripcion) VALUES ('Duplex');
+INSERT INTO properties_type (descripcion) VALUES ('Casa');
+INSERT INTO properties_type (descripcion) VALUES ('Chalet');
+INSERT INTO properties_type (descripcion) VALUES ('Cortijo');
+INSERT INTO properties_type (descripcion) VALUES ('Solar');
+INSERT INTO properties_type (descripcion) VALUES ('Finca');
+INSERT INTO properties_type (descripcion) VALUES ('Adosado');
+
 -- earthdistance
 -- http://tapoueh.org/blog/2013/08/05-earthdistance
 -- create extension cube;
@@ -244,6 +262,17 @@ as select id,owner,tipo_vivienda,num_bedrooms,num_bathrooms,num_toilets,num_kitc
 other_features,views,zona,urbanization,price,meters,year_built,reformed,photos,keys,direccion,objeto,geopos,poblacion,remarks,nota_simple,estado
 from properties_for_sale where estado ='for sale';
 
+--
+-- Datos de prueba
+--
+insert into properties_for_sale (id_customers_type,tipo_vivienda,num_bedrooms,zona,price,geopos) 
+values (1,'apartamento',2,'Centro',150000,POINT(-71.060316, 48.432044));
+
+insert into properties_for_sale (id_customers_type,tipo_vivienda,num_bedrooms,zona,price,geopos) 
+values (1,'apartamento',3,'San Cristobal',355000,POINT(-71.660316, 48.452044));
+
+insert into properties_for_sale (id_customers_type,tipo_vivienda,num_bedrooms,zona,price,geopos) 
+values (1,'casa',3,'Casco Antiguo',115000,POINT(-72.660316, 42.452044));
 
 --
 -- Posibles consultas

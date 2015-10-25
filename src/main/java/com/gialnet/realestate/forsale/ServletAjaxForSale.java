@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gialnet.realstate.forsale;
+package com.gialnet.realestate.forsale;
 
-import Photos.ResizeImages;
+import com.gialnet.realestate.photos.ResizeImages;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.sql.SQLException;

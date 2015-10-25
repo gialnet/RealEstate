@@ -81,10 +81,11 @@ function CrearTablaProperties(myJson)
         tabla.AddRowCellText(row, 1, obj[j].tipo_vivienda );
         tabla.AddRowCellText(row, 2, obj[j].num_bedrooms );
         tabla.AddRowCellText(row, 3, obj[j].garage );
-        tabla.AddRowCellText(row, 4, obj[j].LocalePrice );
+        
+        tabla.AddRowCellNumber(row, 4, obj[j].LocalePrice );
         
         tabla.AddRowCellText(row, 5, obj[j].zona );
-        tabla.AddRowCellText(row, 6, obj[j].price );
+        tabla.AddRowCellText(row, 6, obj[j].urbanization );
     
         window.fila++;
         myfila=window.fila;

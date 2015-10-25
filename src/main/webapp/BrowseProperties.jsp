@@ -4,8 +4,8 @@
     Author     : antonio
 --%>
 
-<%@page import="com.gialnet.realstate.forsale.SQLForSale"%>
-<%@page import="com.gialnet.realstate.forsale.TuplasForSale"%>
+<%@page import="com.gialnet.realestate.forsale.SQLForSale"%>
+<%@page import="com.gialnet.realestate.forsale.TuplasForSale"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -168,14 +168,14 @@
                                 <div class="navbar-inner"><h6>Usuario : Rol : </h6></div>
                             </div>
                             <ul class="toolbar">
-                                <li><a title="Nuevo Capítulo" href="#modalPresupuesto" data-toggle="modal"><i class="icon-plus"></i>
-                                        <span>Nuevo Capítulo</span></a>
+                                <li><a title="Nueva Propiedad" href="#modalPresupuesto" data-toggle="modal"><i class="icon-plus"></i>
+                                        <span>Nueva Propiedad</span></a>
                                 </li>
                                 <li><a title="" href="#modalPartida" data-toggle="modal"><i class="icon-plus"></i>
-                                        <span>Nueva Partida</span></a>
+                                        <span>Nuevo Alquiler</span></a>
                                 </li>
-                                <li><a title="" href="ServletpdfPresupuesto.servlet"><i class="fam-page-white-acrobat"></i>
-                                        <span>Imprimir presupuesto</span></a>
+                                <li><a title="" href="#"><i class="fam-page-white-acrobat"></i>
+                                        <span>Imprimir lista</span></a>
                                 </li>
                             </ul>
 

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gialnet.realstate.forsale;
+package com.gialnet.realestate.forsale;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;
@@ -446,7 +446,9 @@ public class TuplasForSale {
         this.remarks=builder.remarks;
         this.nota_simple=builder.nota_simple;
         this.estado=builder.estado;
-        this.LocalePrice=NumberFormat.getCurrencyInstance(formato).format(price);
+        NumberFormat format = NumberFormat.getCurrencyInstance(formato);
+        format.setMaximumFractionDigits(0);
+        this.LocalePrice=format.format(price);
         this.other_features=builder.other_features;
         this.urbanization=builder.urbanization;
         

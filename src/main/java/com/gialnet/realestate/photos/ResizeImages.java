@@ -4,7 +4,7 @@
  * otra libreria http://www.thebuzzmedia.com/software/imgscalr-java-image-scaling-library/#download
  * otra imagenJ
  */
-package Photos;
+package com.gialnet.realestate.photos;
 
 import java.io.File;
 import java.io.IOException;
