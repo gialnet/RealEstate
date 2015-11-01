@@ -12,6 +12,12 @@
 <%@page import="java.math.BigDecimal"%>
 <%@page import="com.gialnet.realestate.customers.SQLCustomersType"%>
 <%@page import="com.gialnet.realestate.customers.TuplasCustomersType"%>
+<%@page import="com.gialnet.realestate.property_types.SQLPropertyTypes"%>
+<%@page import="com.gialnet.realestate.property_types.TuplasPropertyTypes"%>
+<%@page import="com.gialnet.realestate.property_views.SQLPropertyViews"%>
+<%@page import="com.gialnet.realestate.property_views.TuplasPropertyViews"%>
+<%@page import="com.gialnet.realestate.properties_town.TuplasPropertyTown"%>
+<%@page import="com.gialnet.realestate.properties_town.SQLPropertyTown"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -285,7 +291,7 @@
                                     <input type="hidden" name="xIDCliente" id="xIDCliente" value="<%= "cliente.getID()" %>">
                                     
                                     <div class="<%= "VerTipoCliente" %>">
-                                    <label class="control-label" for="Tipo">Tipo:</label>
+                                    <label class="control-label" for="Tipo">Tipo Cliente:</label>
                                     <select name="xTipo" id="xTipo">
                                         <%
                                          List<TuplasCustomersType> Tuplas = new SQLCustomersType().getTuplasCustomersType();
@@ -297,54 +303,131 @@
                                         %>
                                     </select>
                                     </div>
+                                    <div class="<%= "VerTipoPropiedad" %>">
+                                    <label class="control-label" for="TipoProperty">Tipo Inmueble:</label>
+                                    <select name="xTipoProperty" id="xTipoProperty">
+                                        <%
+                                         List<TuplasPropertyTypes> TuplasPT = new SQLPropertyTypes().getTuplasPropertyTypes();
+                                         String opcionPT;
+                                         for (TuplasPropertyTypes TiposPT : TuplasPT) {
+                                             opcionPT="<option value=\""+TiposPT.getId()+"\">"+TiposPT.getDescripcion()+"</option>";
+                                             out.write(opcionPT);
+                                         }
+                                        %>
+                                    </select>
+                                    </div>
                                     
                                                
                                     <div class="control-group">
 
-                                        <label class="control-label" for="NIF">NIF/CIF:</label>
-                                        <input type="text" name="xNIF" id="xNIF" maxlength="10"
+                                        <label class="control-label" for="NIF">Dormitorios:</label>
+                                        <input type="text" name="xBedRooms" id="xBedRooms" maxlength="3" size="5"
                                                value="<%= "cliente.getNif()" %>">
 
                                     </div>
 
                                     <div class="control-group">
-                                        <label class="control-label" for="Razón social">Razon Social:</label>
-                                        <input type="text" name="xNombre" maxlength="90" size="60"
+                                        <label class="control-label" for="xBathrooms">Baños:</label>
+                                        <input type="text" name="xBathrooms" id="xBathrooms" maxlength="3" size="5"
                                                placeholder="Nombre del cliente" required="required"
                                                value="<%= "cliente.getNombre()" %>">
 
                                     </div>
 
                                     <div class="control-group">
-                                        <label class="control-label" for="Dirección postal">Dirección postal:</label>
-                                        <input type="text" name="xDireccion" maxlength="90" size="60" required="required"
-                                               placeholder="Ejem: Calle Rivera del Manzanares, 7"
+                                        <label class="control-label" for="num_kitchens">Cocina:</label>
+                                        <input type="text" name="xKitchens" id="xKitchens" maxlength="3" size="5"
                                                value="<%= "cliente.getDireccion()" %>">
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label" for="Ubicación">Piso apartamento:</label>
-                                        <input type="text" name="xObjeto" maxlength="40" size="40"
-                                               placeholder="Ejem: Bloque A 2ºB"
-                                               value="<%= "cliente.getObjeto()" %>">
+                                        <label class="control-label" for="toilets">Aseo:</label>
+                                        <input type="text" name="xToilets" id="xToilets" maxlength="3" size="5"
+                                               value="<%= "cliente.getPoblacion()" %>">
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label" for="Municipio país">Cod. Postal Población:</label>
-                                        <input type="text" name="xPoblacion" maxlength="90" size="60" required="required"
-                                               placeholder="Ejem: 18152 Dílar Granada"
-                                               value="<%= "cliente.getPoblacion()" %>">
+                                        <label class="control-label" for="saloons">Salón:</label>
+                                        <input type="text" name="xSaloons" id="xSaloons" maxlength="3" size="5"
+                                               value="<%= "cliente.getObjeto()" %>">
                                     </div>
 
                                     <div class="control-group">
-                                        <label class="control-label" for="Móvil">Teléfono/Móvil:</label>
-                                        <input type="text" name="xMovil" maxlength="10"
+                                        <label class="control-label" for="garage">Garaje:</label>
+                                        <input type="text" name="xGarage" id="xGarage" maxlength="3" size="5"
                                                value="<%= "cliente.getMovil()" %>">
                                     </div>
 
                                     <div class="control-group">
-                                        <label class="control-label" for="eMailF">e-Mail:</label>
-                                        <input type="email" name="xMail" maxlength="60" size="60" 
-                                               placeholder="sumail@suisp.es"
+                                        <label class="control-label" for="terrace">Terraza:</label>
+                                        <input type="text" name="xTerrace" id="xTerrace" maxlength="3" size="5" 
                                                value="<%= "cliente.getMail()" %>">
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="meters">Metros:</label>
+                                        <input type="text" name="xMetros" id="xMetros" maxlength="4" size="5" 
+                                               value="<%= "cliente.getMail()" %>">
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="price">Precio:</label>
+                                        <input type="text" name="xPrice" id="xPrice" maxlength="10" size="10" 
+                                               value="<%= "cliente.getMail()" %>">
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="year_built">Año construcción:</label>
+                                        <input type="text" name="xYear_built" id="xYear_built" maxlength="4" size="5" 
+                                               value="<%= "cliente.getMail()" %>">
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="reformed">Reformado:</label>
+                                        <input type="text" name="xReformed" id="xReformed" maxlength="4" size="5" 
+                                               value="<%= "cliente.getMail()" %>">
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="keys">Llaves:</label>
+                                        <input type="text" name="xKeys" id="xKeys" maxlength="4" size="5" 
+                                               value="<%= "cliente.getMail()" %>">
+                                    </div>
+                                    <div class="control-group">
+                                    <label>Llaves</label>                                    
+                                    <input type = "radio"
+                                           name = "RyI"
+                                           id = "xKey"
+                                           value = "Llaves"
+                                           checked = "checked" />
+                                    
+                                    <label for = "xKey">No hay llaves</label>
+                                    
+                                    <input type = "radio" 
+                                           name = "RyI"
+                                           id = "xNoKey"
+                                           value = "No hay llaves" />
+                                    
+                                </div>
+                                    
+                                    <div class="<%= "VerTipoVistas" %>">
+                                    <label class="control-label" for="TipoVistas">Vistas:</label>
+                                    <select name="xTipoView" id="xTipoView">
+                                        <%
+                                         List<TuplasPropertyViews> TuplasViews = new SQLPropertyViews().getTuplasPropertyViews();
+                                         String opcionViews;
+                                         for (TuplasPropertyViews TiposVW : TuplasViews) {
+                                             opcionViews="<option value=\""+TiposVW.getId()+"\">"+TiposVW.getDescripcion()+"</option>";
+                                             out.write(opcionViews);
+                                         }
+                                        %>
+                                    </select>
+                                    </div>
+                                    <div class="<%= "VerTown" %>">
+                                    <label class="control-label" for="Town">Ciudad:</label>
+                                    <select name="xTown" id="xTown">
+                                        <%
+                                         List<TuplasPropertyTown> TuplasTown = new SQLPropertyTown().getTuplasPropertyTown();
+                                         String opcionTown;
+                                         for (TuplasPropertyTown TiposTown : TuplasTown) {
+                                             opcionTown="<option value=\""+TiposTown.getId()+"\">"+TiposTown.getDescripcion()+"</option>";
+                                             out.write(opcionTown);
+                                         }
+                                        %>
+                                    </select>
                                     </div>
 
                                     <div class="control-group">

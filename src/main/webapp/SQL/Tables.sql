@@ -197,6 +197,72 @@ INSERT INTO properties_type (descripcion) VALUES ('Solar');
 INSERT INTO properties_type (descripcion) VALUES ('Finca');
 INSERT INTO properties_type (descripcion) VALUES ('Adosado');
 
+--
+-- Tabla de tipos de vistas
+--
+CREATE TABLE properties_views
+(
+    id              serial      NOT NULL,
+    descripcion     varchar(50),
+    primary key (id)
+);
+
+
+INSERT INTO properties_views (descripcion) VALUES ('Sin vistas');
+INSERT INTO properties_views (descripcion) VALUES ('Primera línea de playa');
+INSERT INTO properties_views (descripcion) VALUES ('Vistas al mar');
+INSERT INTO properties_views (descripcion) VALUES ('Vistas al campo');
+INSERT INTO properties_views (descripcion) VALUES ('Vistas panorámicas');
+
+--
+-- Propiedades municipios
+--
+CREATE TABLE properties_town
+(
+    id              serial      NOT NULL,
+    Pais_ISO3166    varchar(2) default 'ES',
+    codpost         varchar(25),
+    descripcion     varchar(50),
+    primary key (id)
+);
+
+INSERT INTO properties_town (codpost,descripcion) VALUES ('18690','Almuñécar');
+INSERT INTO properties_town (codpost,descripcion) VALUES ('18697','La Herradura');
+INSERT INTO properties_town (codpost,descripcion) VALUES ('18680','Salobreña');
+INSERT INTO properties_town (codpost,descripcion) VALUES ('18600','Motril');
+
+
+--
+-- Propiedades municipios por zonas
+--
+CREATE TABLE properties_town_area
+(
+    id              serial      NOT NULL,
+    Pais_ISO3166    varchar(2) default 'ES',
+    codpost         varchar(25),
+    descripcion     varchar(50),
+    primary key (id)
+);
+
+INSERT INTO properties_town_area (codpost,descripcion) VALUES ('18690','San Cristobal');
+INSERT INTO properties_town_area (codpost,descripcion) VALUES ('18690','Castillo');
+INSERT INTO properties_town_area (codpost,descripcion) VALUES ('18690','Cotobro');
+INSERT INTO properties_town_area (codpost,descripcion) VALUES ('18690','San Sebastian');
+INSERT INTO properties_town_area (codpost,descripcion) VALUES ('18690','Torrecuevas');
+INSERT INTO properties_town_area (codpost,descripcion) VALUES ('18690','Los Pinos');
+INSERT INTO properties_town_area (codpost,descripcion) VALUES ('18690','Punta de la mona');
+INSERT INTO properties_town_area (codpost,descripcion) VALUES ('18690','Loma del gato');
+INSERT INTO properties_town_area (codpost,descripcion) VALUES ('18690','Taramay');
+INSERT INTO properties_town_area (codpost,descripcion) VALUES ('18690','Centro');
+INSERT INTO properties_town_area (codpost,descripcion) VALUES ('18690','Paseo del Altillo');
+INSERT INTO properties_town_area (codpost,descripcion) VALUES ('18690','P4');
+INSERT INTO properties_town_area (codpost,descripcion) VALUES ('18690','La Velilla');
+INSERT INTO properties_town_area (codpost,descripcion) VALUES ('18690','El Pozuelo');
+INSERT INTO properties_town_area (codpost,descripcion) VALUES ('18690','Playa Cabria');
+INSERT INTO properties_town_area (codpost,descripcion) VALUES ('18690','Colina de la cruz');
+INSERT INTO properties_town_area (codpost,descripcion) VALUES ('18690','Los Mateos');
+INSERT INTO properties_town_area (codpost,descripcion) VALUES ('18690','Barranco casa Adelfa');
+
 -- earthdistance
 -- http://tapoueh.org/blog/2013/08/05-earthdistance
 -- create extension cube;
