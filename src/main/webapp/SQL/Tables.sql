@@ -228,6 +228,9 @@ CREATE TABLE properties_town
 
 INSERT INTO properties_town (codpost,descripcion) VALUES ('18690','Almuñécar');
 INSERT INTO properties_town (codpost,descripcion) VALUES ('18697','La Herradura');
+INSERT INTO properties_town (codpost,descripcion) VALUES ('18699','Jete');
+INSERT INTO properties_town (codpost,descripcion) VALUES ('18698','Otivar');
+INSERT INTO properties_town (codpost,descripcion) VALUES ('18699','Lentegi');
 INSERT INTO properties_town (codpost,descripcion) VALUES ('18680','Salobreña');
 INSERT INTO properties_town (codpost,descripcion) VALUES ('18600','Motril');
 
@@ -238,30 +241,57 @@ INSERT INTO properties_town (codpost,descripcion) VALUES ('18600','Motril');
 CREATE TABLE properties_town_area
 (
     id              serial      NOT NULL,
-    Pais_ISO3166    varchar(2) default 'ES',
-    codpost         varchar(25),
+    id_town         integer references properties_town(id),
     descripcion     varchar(50),
     primary key (id)
 );
 
-INSERT INTO properties_town_area (codpost,descripcion) VALUES ('18690','San Cristobal');
-INSERT INTO properties_town_area (codpost,descripcion) VALUES ('18690','Castillo');
-INSERT INTO properties_town_area (codpost,descripcion) VALUES ('18690','Cotobro');
-INSERT INTO properties_town_area (codpost,descripcion) VALUES ('18690','San Sebastian');
-INSERT INTO properties_town_area (codpost,descripcion) VALUES ('18690','Torrecuevas');
-INSERT INTO properties_town_area (codpost,descripcion) VALUES ('18690','Los Pinos');
-INSERT INTO properties_town_area (codpost,descripcion) VALUES ('18690','Punta de la mona');
-INSERT INTO properties_town_area (codpost,descripcion) VALUES ('18690','Loma del gato');
-INSERT INTO properties_town_area (codpost,descripcion) VALUES ('18690','Taramay');
-INSERT INTO properties_town_area (codpost,descripcion) VALUES ('18690','Centro');
-INSERT INTO properties_town_area (codpost,descripcion) VALUES ('18690','Paseo del Altillo');
-INSERT INTO properties_town_area (codpost,descripcion) VALUES ('18690','P4');
-INSERT INTO properties_town_area (codpost,descripcion) VALUES ('18690','La Velilla');
-INSERT INTO properties_town_area (codpost,descripcion) VALUES ('18690','El Pozuelo');
-INSERT INTO properties_town_area (codpost,descripcion) VALUES ('18690','Playa Cabria');
-INSERT INTO properties_town_area (codpost,descripcion) VALUES ('18690','Colina de la cruz');
-INSERT INTO properties_town_area (codpost,descripcion) VALUES ('18690','Los Mateos');
-INSERT INTO properties_town_area (codpost,descripcion) VALUES ('18690','Barranco casa Adelfa');
+INSERT INTO properties_town_area (id_town,descripcion) VALUES (1,'San Cristobal');
+INSERT INTO properties_town_area (id_town,descripcion) VALUES (1,'Castillo');
+INSERT INTO properties_town_area (id_town,descripcion) VALUES (1,'Cotobro');
+INSERT INTO properties_town_area (id_town,descripcion) VALUES (1,'San Sebastian');
+INSERT INTO properties_town_area (id_town,descripcion) VALUES (1,'Torrecuevas');
+INSERT INTO properties_town_area (id_town,descripcion) VALUES (1,'Los Pinos');
+INSERT INTO properties_town_area (id_town,descripcion) VALUES (1,'Punta de la mona');
+INSERT INTO properties_town_area (id_town,descripcion) VALUES (1,'Loma del gato');
+INSERT INTO properties_town_area (id_town,descripcion) VALUES (1,'Taramay');
+INSERT INTO properties_town_area (id_town,descripcion) VALUES (1,'Centro');
+INSERT INTO properties_town_area (id_town,descripcion) VALUES (1,'Paseo del Altillo');
+INSERT INTO properties_town_area (id_town,descripcion) VALUES (1,'P4');
+INSERT INTO properties_town_area (id_town,descripcion) VALUES (1,'La Velilla');
+INSERT INTO properties_town_area (id_town,descripcion) VALUES (1,'El Pozuelo');
+INSERT INTO properties_town_area (id_town,descripcion) VALUES (1,'Playa Cabria');
+INSERT INTO properties_town_area (id_town,descripcion) VALUES (1,'Colina de la cruz');
+INSERT INTO properties_town_area (id_town,descripcion) VALUES (1,'Los Mateos');
+INSERT INTO properties_town_area (id_town,descripcion) VALUES (1,'Barranco casa Adelfa');
+
+--
+-- Propiedades municipios edificios
+--
+CREATE TABLE properties_town_building
+(
+    id              serial      NOT NULL,
+    id_town         integer references properties_town(id),
+    geopos          point, -- geo posicionamiento
+    descripcion     varchar(50),
+    primary key (id)
+);
+INSERT INTO properties_town_building (id_town,geopos,descripcion) VALUES (1,POINT(36.73231, -3.694378), 'La Palmera Blq. A');
+INSERT INTO properties_town_building (id_town,geopos,descripcion) VALUES (1,POINT(36.73204, -3.697908), 'Mar de Plata');
+INSERT INTO properties_town_building (id_town,geopos,descripcion) VALUES (1,POINT(36.73250, -3.699394), 'La Piramide');
+INSERT INTO properties_town_building (id_town,geopos,descripcion) VALUES (1,POINT(36.73398, -3.701797), 'Mariote');
+INSERT INTO properties_town_building (id_town,geopos,descripcion) VALUES (1,POINT(36.73450, -3.702704), 'Chinasol');
+
+
+--
+-- se multiplica por 1.609344 para pasar de millas a kilometros
+--
+select id, descripcion, geopos,
+          round((geopos <@> point(36.73398,-3.701797))::numeric * 1.609344, 3) as km
+     from properties_town_building
+ order by geopos <-> point(36.73398,-3.701797)
+    limit 10;
+
 
 -- earthdistance
 -- http://tapoueh.org/blog/2013/08/05-earthdistance

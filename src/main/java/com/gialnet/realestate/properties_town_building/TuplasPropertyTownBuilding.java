@@ -2,16 +2,17 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gialnet.realestate.properties_town_area;
+package com.gialnet.realestate.properties_town_building;
 
 /**
  *
  * @author antonio
  */
-public class TuplasPropertyTownAreas {
+public class TuplasPropertyTownBuilding {
     private final int id;
     private final int id_town;
-    private final String descripcion;    
+    private final String descripcion;
+    private final int geopos;
 
     public int getId() {
         return id;
@@ -25,13 +26,17 @@ public class TuplasPropertyTownAreas {
     public String getDescripcion() {
         return descripcion;
     }
+
+    public int getGeopos() {
+        return geopos;
+    }
     
     
     public static class Builder {
         private final int id;
         private int id_town=1;
         private String descripcion="";
-        
+        private int geopos;
 
         public Builder(int id) {
             this.id = id;
@@ -45,18 +50,23 @@ public class TuplasPropertyTownAreas {
             this.descripcion = descripcion;
             return this;
         }
+        public Builder Geopos (final int geopos) {
+            this.geopos=geopos;
+            return this;
+        }
 
-        public TuplasPropertyTownAreas build() {
+        public TuplasPropertyTownBuilding build() {
             
-            return new TuplasPropertyTownAreas(this);
+            return new TuplasPropertyTownBuilding(this);
         }
     }
     
-    private TuplasPropertyTownAreas(Builder builder) {
+    private TuplasPropertyTownBuilding(Builder builder) {
         
         this.id = builder.id;
         this.id_town=builder.id_town;
         this.descripcion= builder.descripcion;
+        this.geopos=builder.geopos;
         
     }
     
